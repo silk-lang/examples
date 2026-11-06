@@ -1,0 +1,5 @@
+[package]
+name = "hello"
+version = "0.1.0"
+silk-version = "0.1.0-dev.50+e1a2bc7cec4a"
+description = "A program that logs a greeting"

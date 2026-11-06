@@ -1,0 +1,7 @@
+[package]
+name = "library"
+version = "0.1.0"
+silk-version = "0.1.0-dev.50+e1a2bc7cec4a"
+description = "A library package with one function and its test"
+kind = "library"
+exports = ["lib"]

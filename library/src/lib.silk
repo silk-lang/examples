@@ -1,0 +1,11 @@
+import silk.testing.testing { AssertionError, Testing }
+
+/// The sum of `left` and `right`.
+pub fn add(left: i32, right: i32) -> i32 {
+  return left + right
+}
+
+test effect fn addsTwoNumbers() -> ()
+  ! AssertionError<'static> {
+  run Testing.expect(add(2, 3) == 5, "2 + 3 is 5")
+}
