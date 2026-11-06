@@ -9,10 +9,14 @@ silk init my-app -t hello   # same as -t silk-lang/examples/hello
 
 | Template  | What it is                                        |
 | --------- | ------------------------------------------------- |
+| `default` | What `silk init` creates without `-t`             |
 | `hello`   | A program that logs a greeting                    |
 | `library` | A library package with one function and its test |
 
 ## Adding a template
+
+`silk init` without a template uses `default`; `silk init -t minimal` makes the same kind of
+project offline, from the compiler itself.
 
 Add a directory with a `silk.toml` and give it a `[package].description`; `silk init --list` shows
 it. `silk init` sets the new project's package name and `silk-version`, so the values here only
