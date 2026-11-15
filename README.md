@@ -26,9 +26,9 @@ The JavaScript templates keep the app in a Vite project in `web/`; the Loom one 
 `src/app.silk`.
 
 The JavaScript templates install `@silkui/core`, `@silkui/react`, `@silkui/foldkit` and
-`@silkui/vite` from npm, so they work once those packages are published. Until then, point
-`web/package.json` at a silkui checkout (`"@silkui/core": "file:<silkui>/modules/js/packages/core"`
-and so on, with `install-links=true` in `web/.npmrc`).
+`@silkui/vite` from npm. To try unreleased changes, point `web/package.json` at a silkui
+checkout (`"@silkui/core": "file:<silkui>/modules/js/packages/core"` and so on, with
+`install-links=true` in `web/.npmrc`).
 
 `silkui` is pinned to a silkui revision, and `ui-loom`'s `loom` to a silk-lang/loom one. The
 generated hosts take their packages from those same dependencies, so bump each to a revision
