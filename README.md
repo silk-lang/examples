@@ -21,16 +21,16 @@ silk init my-app -t hello   # same as -t silk-lang/examples/hello
 
 Each `ui-*` template is a hello-world that runs with `silk task dev` right after `silk init`.
 `src/tasks.silk` defines the app (what it is written in, where it runs) and the `dev` and
-`build` tasks, all through one dependency, [silkui](https://github.com/silk-lang/lib-ui/tree/main/modules/silkui).
+`build` tasks, all through one dependency, [silkui](https://github.com/silk-lang/silkui/tree/main/modules/silkui).
 The JavaScript templates keep the app in a Vite project in `web/`; the Loom one keeps it in
 `src/app.silk`.
 
 The JavaScript templates install `@silkui/core`, `@silkui/react`, `@silkui/foldkit` and
 `@silkui/vite` from npm, so they work once those packages are published. Until then, point
-`web/package.json` at a lib-ui checkout (`"@silkui/core": "file:<lib-ui>/modules/js/packages/core"`
+`web/package.json` at a silkui checkout (`"@silkui/core": "file:<silkui>/modules/js/packages/core"`
 and so on, with `install-links=true` in `web/.npmrc`).
 
-`silkui` is pinned to a lib-ui revision, and `ui-loom`'s `loom` to a silk-lang/loom one. The
+`silkui` is pinned to a silkui revision, and `ui-loom`'s `loom` to a silk-lang/loom one. The
 generated hosts take their packages from those same dependencies, so bump each to a revision
 that works with the other.
 
