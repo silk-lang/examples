@@ -1,0 +1,57 @@
+//! The app and its tasks: `silk task dev` opens it in a window and restarts it when a file in
+//! src/ changes (`--target web-canvas` or `web-dom` serves it as a page that reloads instead);
+//! `silk task build` writes the release program to dist/window/ and each page to dist/<target>/.
+import silkui.app { App, Framework, Target, Window, Page, Mode, Built, Running }
+import silk.cli.command { Command, CommandLine, Opt }
+import silk.cli.task { Task, TaskError, TaskSet }
+import silk.io.writer { WriterError }
+import silk.mem.allocator { Allocator, OutOfMemoryError }
+import silk.system.child_process { ChildProcess, ProcessError }
+import silk.system.filesystem { FileError, FileSystem }
+import silk.system.host_input { HostInput, HostInputError }
+import silk.text.string { String }
+
+/// The app: what it is written in and where it runs. Its name names the program in dist/.
+effect fn app() -> App ! OutOfMemoryError ? &mut Allocator {
+  return run App.make("my-app")
+    |> App.framework(Framework.loom("app"))
+    |> App.target(Target.window(Window { title: "My app", width: 420.0, height: 200.0 }))
+    |> App.target(Target.webDom(Page { title: "My app" }))
+    // Uncomment to also draw it on a WebGPU canvas in the browser, as the window does.
+    // |> App.target(Target.webCanvas(Page { title: "My app" }))
+}
+
+union Tasks {
+  Dev { pub target: String },
+  Build { pub target: String },
+}
+
+impl CommandLine for Tasks {
+  static fn command() -> Command<Tasks> {
+    return Command<Tasks>.make("tasks", "Build and run the app")
+      |> Command.variant("Dev", "Open the app with the development tools, rebuilding on change")
+      |> Command.variant("Build", "Write the release programs to dist/<target>/")
+      |> Command.option("target", Opt.about("Only this target (window, web-canvas, web-dom)"))
+  }
+}
+
+impl TaskSet for Tasks {
+  effect fn perform(self: Tasks) -> ()
+    ! TaskError | ProcessError | FileError | HostInputError | OutOfMemoryError | WriterError
+    ? &mut HostInput | &mut Allocator | &mut ChildProcess | &mut FileSystem {
+    match move self {
+      Tasks.Dev { target } => run app()
+        |> App.only(String.view(&target))
+        |> App.build(Mode.Dev)
+        |> Built.launch()
+        |> Running.watch()
+      Tasks.Build { target } => run app()
+        |> App.only(String.view(&target))
+        |> App.build(Mode.Release)
+        |> Built.tap(Built.sizes)
+        |> Built.write("dist")
+    }
+  }
+}
+
+pub effect fn main() -> i32 ? &mut HostInput { return run Task.main<Tasks>() }
