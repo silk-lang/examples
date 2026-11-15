@@ -30,8 +30,9 @@ The JavaScript templates install `@silkui/core`, `@silkui/react`, `@silkui/foldk
 `web/package.json` at a lib-ui checkout (`"@silkui/core": "file:<lib-ui>/modules/js/packages/core"`
 and so on, with `install-links=true` in `web/.npmrc`).
 
-`silkui` and `loom` are pinned to the same lib-ui revision. Move them together: the
-generated hosts take their Silk UI packages from the same place as `silkui`.
+`silkui` is pinned to a lib-ui revision, and `ui-loom`'s `loom` to a silk-lang/loom one. The
+generated hosts take their packages from those same dependencies, so bump each to a revision
+that works with the other.
 
 ## Adding a template
 
