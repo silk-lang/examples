@@ -1,0 +1,9 @@
+[package]
+name = "ui-foldkit"
+description = "A Silk UI app written in Foldkit, with Vite: silk task dev, silk task build"
+version = "0.1.0"
+silk-version = "0.1.0-dev.74+205aea3f5b2e"
+
+# The app is JavaScript, in web/. Silk only builds the tasks, which build and run the app.
+[profiles.tasks.dependencies]
+silkui = { git = "https://github.com/silk-lang/lib-ui.git", rev = "9fe6fc4ed8a1f0186fdfc60d2c5657aeed34c23e", path = "modules/silkui", package = "silkui" }
