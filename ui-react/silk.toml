@@ -6,4 +6,4 @@ silk-version = "0.1.0-dev.74+205aea3f5b2e"
 
 # The app is JavaScript, in web/. Silk only builds the tasks, which build and run the app.
 [profiles.tasks.dependencies]
-silkui = { git = "https://github.com/silk-lang/lib-ui.git", rev = "70bbde35bbf926fb49f120b160fa28d440c9c6b5", path = "modules/silkui", package = "silkui" }
+silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "479dc546476aeb22172dbea6a48b4ba162b5c221", path = "modules/silkui", package = "silkui" }
