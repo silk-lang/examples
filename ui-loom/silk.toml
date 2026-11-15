@@ -7,13 +7,13 @@ kind = "library"
 main = "app.silk"
 exports = ["app"]
 
-# The app is the app module: silkui generates the host that opens it. Keep loom and silkui on
-# the same revision, so the app and the host share one Loom.
+# The app is the app module: silkui generates the host that opens it, taking Loom's hosts
+# from this same loom dependency, so the app and the host share one Loom.
 [dependencies]
-loom = { git = "https://github.com/silk-lang/lib-ui.git", rev = "9fe6fc4ed8a1f0186fdfc60d2c5657aeed34c23e", path = "modules/loom", package = "loom" }
+loom = { git = "https://github.com/silk-lang/loom.git", rev = "6e62685407f6bc65126fe2049e021711bb6e1973", path = "modules/loom", package = "loom" }
 
 [profiles.tasks]
 main = "tasks.silk"
 
 [profiles.tasks.dependencies]
-silkui = { git = "https://github.com/silk-lang/lib-ui.git", rev = "9fe6fc4ed8a1f0186fdfc60d2c5657aeed34c23e", path = "modules/silkui", package = "silkui" }
+silkui = { git = "https://github.com/silk-lang/lib-ui.git", rev = "70bbde35bbf926fb49f120b160fa28d440c9c6b5", path = "modules/silkui", package = "silkui" }
