@@ -1,5 +1,5 @@
 //! The app and its tasks: `silk task dev` opens it in a window, and Vite replaces the modules
-//! an edit touches; `silk task build` writes the release program, bundle inside, to dist/window/.
+//! an edit touches; `silk task build --release` writes the release program, bundle inside, to dist/window/.
 import silkui.app { App, Framework, Target, Window, Built, Running }
 import silk.build.graph { Options, BuildError }
 import silk.cli.command { Command, CommandLine, Opt }
@@ -31,7 +31,7 @@ impl CommandLine for Tasks {
   static fn command() -> Command<Tasks> {
     return Command<Tasks>.make("tasks", "Build and run the app")
       |> Command.variant("Dev", "Open the app with the development tools, rebuilding on change")
-      |> Command.variant("Build", "Write the release programs to dist/<target>/")
+      |> Command.variant("Build", "Write the programs to dist/<target>/ (use --release to optimize)")
       |> Command.flatten("options")
       |> Command.variant("Plan", "Write the editor compilation requests")
       |> Command.option("platform", Opt.about("Only this target (window)"))
