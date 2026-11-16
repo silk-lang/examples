@@ -1,0 +1,71 @@
+//! A counter written in Loom. silkui generates the window around it.
+import loom.lib { Document, Node, NoCommand, NoOutput, Program, Update }
+import silk.mem.allocator { Allocator, OutOfMemoryError }
+
+/// Everything the program remembers.
+pub struct Model {
+  pub count: i64,
+}
+
+/// Everything that can happen.
+pub union Message {
+  ClickedIncrement,
+  ClickedDecrement,
+  ClickedReset,
+}
+
+type Next = Update<Model, NoCommand, NoOutput>
+
+impl Program<Message, NoCommand> for Model {
+  /// The model the program starts with.
+  effect fn init() -> Next
+    ! OutOfMemoryError
+    ? &mut Allocator {
+    return Next.of(Model { count: 0 })
+  }
+
+  /// The model after a message. Nothing else changes the model.
+  effect fn update(mut model: Model, message: Message) -> Next
+    ! OutOfMemoryError
+    ? &mut Allocator {
+    match move message {
+      Message.ClickedIncrement => {
+        model.count = model.count + 1
+      }
+      Message.ClickedDecrement => {
+        model.count = model.count - 1
+      }
+      Message.ClickedReset => {
+        model.count = 0
+      }
+    }
+    return Next.of(move model)
+  }
+
+  /// What the screen shows for a model.
+  fn view(model: &Model, h: &Document<Message>) -> Node {
+    return h.row(
+      &[h.class("flex items-center gap-3 p-4 font-sans")],
+      &[
+        button(h, "-", Message.ClickedDecrement),
+        h.row(
+          &[
+            h.testId("count"),
+            h.class("flex min-w-12 justify-center text-2xl"),
+          ],
+          &[h.number(model.count)],
+        ),
+        button(h, "+", Message.ClickedIncrement),
+        button(h, "Reset", Message.ClickedReset),
+      ],
+    )
+  }
+}
+
+/// A button is a function: it takes what to show and the message a click sends.
+fn button(h: &Document<Message>, label: string, message: Message) -> Node {
+  return h.button(
+    &[h.onClick(move message), h.class("counter-button rounded-lg border border-slate-300 px-4 py-2 text-slate-900 hover:bg-slate-100 focus-visible:outline-2 focus-visible:outline-blue-500")],
+    &[h.text(label)],
+  )
+}

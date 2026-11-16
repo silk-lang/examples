@@ -16,6 +16,10 @@ silk init my-app -t hello   # same as -t silk-lang/examples/hello
 | `ui-foldkit` | A Silk UI app in Foldkit, in a window |
 | `ui-js` | A Silk UI app in plain TypeScript, in a window |
 | `ui-loom` | A Silk UI app in Loom, in a window and a browser page |
+| `ui-react-tailwind` | React counter with Tailwind CSS |
+| `ui-foldkit-tailwind` | Foldkit counter with Tailwind CSS |
+| `ui-js-tailwind` | TypeScript counter with Tailwind CSS |
+| `ui-loom-tailwind` | Loom counter with Tailwind CSS on window, canvas and DOM |
 
 ## Silk UI templates
 
@@ -33,6 +37,10 @@ checkout (`"@silkui/core": "file:<silkui>/modules/js/packages/core"` and so on, 
 `silkui` is pinned to a silkui revision, and `ui-loom`'s `loom` to a silk-lang/loom one. The
 generated hosts take their packages from those same dependencies, so bump each to a revision
 that works with the other.
+
+The `*-tailwind` variants use literal classes and a stylesheet. JavaScript variants run
+`@tailwindcss/vite` before `@silkui/vite`; Loom uses the separate `ui-tailwind` build/watch
+helper, which can run without Node. The original templates keep their style-object defaults.
 
 ## Adding a template
 

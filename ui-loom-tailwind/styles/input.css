@@ -1,0 +1,6 @@
+@import "tailwindcss" source(none);
+@source "../src/**/*.silk";
+
+@layer components {
+  .counter-button { cursor: pointer; }
+}
