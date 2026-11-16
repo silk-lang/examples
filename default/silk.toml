@@ -1,5 +1,5 @@
 [package]
 name = "default"
 version = "0.1.0"
-silk-version = "0.1.0-dev.50+e1a2bc7cec4a"
+silk-version = "0.1.0-pipeline.1"
 description = "A program that logs a greeting, what `silk init` creates"
