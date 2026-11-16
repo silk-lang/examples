@@ -10,10 +10,10 @@ exports = ["app"]
 # The app is the app module: silkui generates the host that opens it, taking Loom's hosts
 # from this same loom dependency, so the app and the host share one Loom.
 [dependencies]
-loom = { git = "https://github.com/silk-lang/loom.git", rev = "7f67391189d52b91ab37979879b837da87fcb826", path = "modules/loom", package = "loom" }
+loom = { git = "https://github.com/silk-lang/loom.git", rev = "ba53483d2ea5231756660ba19d2eadaff853dcc3", path = "modules/loom", package = "loom" }
 
 [profiles.tasks]
 main = "tasks.silk"
 
 [profiles.tasks.dependencies]
-silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "a21db094475baffc69c8837fa53ff15c3d6b2795", path = "modules/silkui", package = "silkui" }
+silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "31575885e39bb5a8b8bf750bdbeb8e7c7cd05b30", path = "modules/silkui", package = "silkui" }
