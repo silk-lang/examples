@@ -16,5 +16,5 @@ loom = { git = "https://github.com/silk-lang/loom.git", rev = "0d0d6030182e8b50c
 main = "tasks.silk"
 
 [profiles.tasks.dependencies]
-silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "eb40dee2fa98cb9c38222117259bf5fc3075aaac", path = "modules/silkui", package = "silkui" }
-tailwind = { git = "https://github.com/silk-lang/silkui.git", rev = "eb40dee2fa98cb9c38222117259bf5fc3075aaac", path = "modules/tailwind", package = "ui-tailwind" }
+silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "3e473455facc4cdffb5926daad39d972744b9c13", path = "modules/silkui", package = "silkui" }
+tailwind = { git = "https://github.com/silk-lang/silkui.git", rev = "3e473455facc4cdffb5926daad39d972744b9c13", path = "modules/tailwind", package = "ui-tailwind" }
