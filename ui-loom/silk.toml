@@ -16,4 +16,4 @@ loom = { git = "https://github.com/silk-lang/loom.git", rev = "ed8cc733a678e5495
 main = "tasks.silk"
 
 [profiles.tasks.dependencies]
-silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "f5321ee1c411653006af247676189df008e9c437", path = "modules/silkui", package = "silkui" }
+silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "6ec475548106e29ffd287f6541e3573227728037", path = "modules/silkui", package = "silkui" }
