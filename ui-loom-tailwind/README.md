@@ -15,4 +15,4 @@ No Node installation is required. The helper uses the project's `node_modules/.b
 
 For plain CSS, remove the helper calls and dependency, write `styles/app.css` directly and track it in Git. Keep `App.stylesheet` and the classes unchanged. Style objects can also be mixed with classes as inline declarations.
 
-Development includes runtime CSS compilation; release embeds compiled sheets and leaves the parser out. The standalone helper runs only in the tasks program. WebGPU needs a compatible Chrome or Edge browser. The helper currently runs on macOS and Linux; select its musl platform explicitly on Alpine.
+Development includes runtime CSS compilation; release embeds compiled sheets without linking the stylesheet text compiler. The standalone helper runs only in the tasks program. WebGPU needs a compatible Chrome or Edge browser. The helper currently runs on macOS and Linux; select its musl platform explicitly on Alpine.
