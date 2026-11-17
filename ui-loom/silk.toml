@@ -3,6 +3,7 @@ name = "ui-loom"
 description = "A Silk UI app written in Loom, Silk's own UI framework: silk task dev, silk task build"
 version = "0.1.0"
 silk-version = "0.1.0-dev.74+205aea3f5b2e"
+source = "silk"
 kind = "library"
 main = "app.silk"
 exports = ["app"]
@@ -16,4 +17,4 @@ loom = { git = "https://github.com/silk-lang/loom.git", rev = "76d00c90936b3f6f6
 main = "tasks.silk"
 
 [profiles.tasks.dependencies]
-silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "0938fb28c420a8214813560098b4df3e50d9bbfd", path = "modules/silkui", package = "silkui" }
+silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "5f174438e42f43dfe76f2e834751b96b0c991890", path = "modules/silkui", package = "silkui" }

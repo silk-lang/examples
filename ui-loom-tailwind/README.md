@@ -9,7 +9,7 @@ silk task dev --target web-canvas    # WebGPU canvas
 silk task build                      # release builds for all three targets
 ```
 
-`src/app.silk` uses literal `h.class("...")` strings. `styles/input.css` imports Tailwind and scans those Silk files with `@source`. The optional `ui-tailwind` helper produces `styles/app.css` before the UI build, and watches source and CSS edits during development. `App.stylesheet("styles/app.css")` then compiles the CSS for window and canvas or links it as a real stylesheet for DOM. CSS edits preserve the counter state.
+`silk/app.silk` uses literal `h.class("...")` strings. `styles/input.css` imports Tailwind and scans those Silk files with `@source`. The optional `ui-tailwind` helper produces `styles/app.css` before the UI build, and watches source and CSS edits during development. `App.stylesheet("styles/app.css")` then compiles the CSS for window and canvas or links it as a real stylesheet for DOM. CSS edits preserve the counter state.
 
 No Node installation is required. The helper uses the project's `node_modules/.bin/tailwindcss` if present; otherwise it downloads the official standalone CLI pinned in `tailwind.lock.json`. The first download is about 100 MB and needs `curl`; later builds use the verified cache in `~/.silk/cache/tailwind/`. Commit the lock file and input CSS. The generated CSS is ignored.
 

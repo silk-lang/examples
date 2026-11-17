@@ -1,3 +1,4 @@
 build/
 .silk/
 dist/
+node_modules/
