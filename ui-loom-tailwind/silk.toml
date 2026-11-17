@@ -18,3 +18,7 @@ main = "tasks.silk"
 [profiles.tasks.dependencies]
 silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "a90c8015c405aea32ebf47e0cc379af3dd3be273", path = "modules/silkui", package = "silkui" }
 tailwind = { git = "https://github.com/silk-lang/silkui.git", rev = "a90c8015c405aea32ebf47e0cc379af3dd3be273", path = "modules/tailwind", package = "ui-tailwind" }
+
+[template]
+# What `silk init` suggests running in the new project, after `cd` into it.
+next-steps = ["silk task dev"]
