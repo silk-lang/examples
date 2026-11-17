@@ -10,7 +10,7 @@ import silk.system.filesystem { FileError, FileSystem }
 import silk.system.host_input { HostInput, HostInputError }
 import silk.text.string { String }
 
-/// The app: what it is written in and where it runs. Its name names the program in dist/.
+/// The app: what it is written in and where it runs. The program in dist/ takes the project's name.
 effect fn app() -> App ! OutOfMemoryError ? &mut Allocator {
   return run App.make("my-app")
     |> App.framework(Framework.foldkit("web"))
@@ -45,7 +45,6 @@ impl TaskSet for Tasks {
       Tasks.Build { target } => run app()
         |> App.only(String.view(&target))
         |> App.build(Mode.Release)
-        |> Built.tap(Built.sizes)
         |> Built.write("dist")
     }
   }
