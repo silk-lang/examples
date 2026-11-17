@@ -13,7 +13,7 @@ import silk.system.filesystem { FileError, FileSystem }
 import silk.system.host_input { HostInput, HostInputError }
 import silk.text.string { String }
 
-/// The app: what it is written in and where it runs. Its name names the program in dist/.
+/// The app: what it is written in and where it runs. The program in dist/ takes the project's name.
 effect fn app() -> App
   ! OutOfMemoryError
   ? &mut Allocator {
@@ -56,7 +56,7 @@ impl TaskSet for Tasks {
     match move self {
       Tasks.Dev { platform, options } => run processor.watching(app()
         |> App.only(String.view(&platform))
-        |> App.build(&options)
+        |> App.dev(&options)
         |> Built.launch()
         |> Running.watch())
       Tasks.Build { platform, options } => {
@@ -64,8 +64,7 @@ impl TaskSet for Tasks {
         run app()
           |> App.only(String.view(&platform))
           |> App.build(&options)
-          |> Built.tap(Built.sizes)
-          |> Built.write("dist")
+            |> Built.write("dist")
       }
       Tasks.Plan { platform, options } => {
         drop run processor.build()

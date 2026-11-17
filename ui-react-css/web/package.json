@@ -6,12 +6,12 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@silkui/core": "^0.1.4",
-    "@silkui/react": "^0.1.4",
+    "@silkui/core": "^0.1.6",
+    "@silkui/react": "^0.1.6",
     "react": "^19.3.0"
   },
   "devDependencies": {
-    "@silkui/vite": "^0.1.4",
+    "@silkui/vite": "^0.1.6",
     "@types/react": "^19.3.0",
     "typescript": "^5.9.3",
     "vite": "^8.3.0"
