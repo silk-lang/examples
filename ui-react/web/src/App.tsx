@@ -81,7 +81,10 @@ function TitleBar({ theme }: { theme: Theme }) {
   return (
     <box style={{ ...row, position: "relative", justifyContent: "center", height: 56, flexShrink: 0 }}>
       <box style={{ ...row, gap: 10, fontWeight: 600, fontSize: 15 }}>
-        <box style={{ width: 10, height: 10, borderRadius: 5, backgroundColor: rgb(theme.ink) }} />
+        <svg width={16} height={16} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.5}>
+          <circle cx="8" cy="8" r="6.5" />
+          <path d="M5 9.5c1.5 1.5 4.5 1.5 6 0M5 6.5c1.5-1.5 4.5-1.5 6 0" strokeLinecap="round" />
+        </svg>
         Silk UI
       </box>
       <box style={{ ...row, gap: 8, position: "absolute", right: 28, top: 0, bottom: 0, fontFamily: mono, fontSize: 12, color: theme.faint }}>
