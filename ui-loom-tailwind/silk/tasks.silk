@@ -1,6 +1,6 @@
 //! The app and its tasks: `silk task dev` opens it in a window and restarts it when a file in
 //! silk/ changes (`--target web-canvas` or `web-dom` serves it as a page that reloads instead);
-//! `silk task build` writes the release program to dist/window/ and each page to dist/<target>/.
+//! `silk task build [--release]` writes the program to dist/window/ and each page to dist/<target>/.
 import tailwind.tailwind { Tailwind }
 import silkui.app { App, Framework, Target, Window, Page, Mode, Built, Running }
 import silk.cli.command { Command, CommandLine, Opt }
@@ -24,14 +24,15 @@ effect fn app() -> App ! OutOfMemoryError ? &mut Allocator {
 
 union Tasks {
   Dev { pub target: String },
-  Build { pub target: String },
+  Build { pub target: String, pub release: bool },
 }
 
 impl CommandLine for Tasks {
   static fn command() -> Command<Tasks> {
     return Command<Tasks>.make("tasks", "Build and run the app")
       |> Command.variant("Dev", "Open the app with the development tools, rebuilding on change")
-      |> Command.variant("Build", "Write the release programs to dist/<target>/")
+      |> Command.variant("Build", "Write the programs to dist/<target>/, without the development tools")
+      |> Command.option("release", Opt.about("Optimize the programs"))
       |> Command.option("target", Opt.about("Only this target (window, web-canvas, web-dom)"))
   }
 }
@@ -47,11 +48,11 @@ impl TaskSet for Tasks {
         |> App.build(Mode.Dev)
         |> Built.launch()
         |> Running.watch())
-      Tasks.Build { target } => {
+      Tasks.Build { target, release } => {
         drop run processor.build()
         run app()
           |> App.only(String.view(&target))
-          |> App.build(Mode.Release)
+          |> App.build(if release { Mode.Release } else { Mode.Debug })
           |> Built.tap(Built.sizes)
           |> Built.write("dist")
       }

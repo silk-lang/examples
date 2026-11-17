@@ -5,7 +5,7 @@ Engine, with no browser inside.
 
 ```sh
 silk run          # or silk task dev: open the window; edits to js/ show up without a restart
-silk task build   # write the release program to dist/window/
+silk task build   # write the program to dist/window/; add --release to optimize it
 ```
 
 The first `dev` installs the npm packages and builds the window, which takes a few

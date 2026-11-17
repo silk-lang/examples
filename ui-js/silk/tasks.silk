@@ -1,5 +1,5 @@
 //! The app and its tasks: `silk task dev` opens it in a window, and Vite replaces the modules
-//! an edit touches; `silk task build` writes the release program, bundle inside, to dist/window/.
+//! an edit touches; `silk task build [--release]` writes the program, bundle inside, to dist/window/.
 import silkui.app { App, Framework, Target, Window, Mode, Built, Running }
 import silk.cli.command { Command, CommandLine, Opt }
 import silk.cli.task { Task, TaskError, TaskSet }
@@ -20,14 +20,15 @@ effect fn app() -> App ! OutOfMemoryError ? &mut Allocator {
 
 union Tasks {
   Dev { pub target: String },
-  Build { pub target: String },
+  Build { pub target: String, pub release: bool },
 }
 
 impl CommandLine for Tasks {
   static fn command() -> Command<Tasks> {
     return Command<Tasks>.make("tasks", "Build and run the app")
       |> Command.variant("Dev", "Open the app with the development tools, rebuilding on change")
-      |> Command.variant("Build", "Write the release programs to dist/<target>/")
+      |> Command.variant("Build", "Write the programs to dist/<target>/, without the development tools")
+      |> Command.option("release", Opt.about("Optimize the programs"))
       |> Command.option("target", Opt.about("Only this target (window)"))
   }
 }
@@ -42,9 +43,9 @@ impl TaskSet for Tasks {
         |> App.build(Mode.Dev)
         |> Built.launch()
         |> Running.watch()
-      Tasks.Build { target } => run app()
+      Tasks.Build { target, release } => run app()
         |> App.only(String.view(&target))
-        |> App.build(Mode.Release)
+        |> App.build(if release { Mode.Release } else { Mode.Debug })
         |> Built.tap(Built.sizes)
         |> Built.write("dist")
     }

@@ -6,7 +6,7 @@ A counter written in Silk and styled by one plain CSS file. It runs in a native 
 silk task dev                        # native window
 silk task dev --target web-dom       # browser DOM
 silk task dev --target web-canvas    # WebGPU canvas
-silk task build                      # release builds for all three targets
+silk task build --release            # release builds for all three targets
 ```
 
 `styles/app.css` holds every style: the layout, the button states (`:hover`, `:active`, `:focus-visible`), a transition, and a theme made of custom properties. `silk/app.silk` only names classes with `h.class("...")`. The theme button adds `dark` to the page's classes, the sheet changes its variables, and every rule that reads them follows.

@@ -7,7 +7,7 @@ and in a browser page.
 ```sh
 silk task dev                    # open the window; it restarts when silk/ changes
 silk task dev --target web-dom   # serve it as a page on http://127.0.0.1:8090/ instead
-silk task build                  # write dist/window/ (a program) and dist/web-dom/ (a site)
+silk task build --release        # write dist/window/ (a program) and dist/web-dom/ (a site)
 ```
 
 The first `dev` builds the window, which takes a few minutes; after that a change relinks in

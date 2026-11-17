@@ -4,7 +4,7 @@ A Silk UI counter in React, styled by one plain CSS file. It runs in a desktop w
 
 ```sh
 silk run          # or silk task dev
-silk task build
+silk task build --release
 ```
 
 `js/app.css` holds every style: the layout, the button states (`:hover`, `:active`, `:focus-visible`), a transition, and a theme made of custom properties. The app only sets class names. The theme button adds `dark` to the page's classes, the sheet changes its variables, and every rule that reads them follows.
