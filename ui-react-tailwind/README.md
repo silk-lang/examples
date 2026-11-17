@@ -4,7 +4,7 @@ A Silk UI counter in React, styled with Tailwind CSS 4. It runs in a desktop win
 
 ```sh
 silk task dev
-silk task build
+silk task build --release
 ```
 
 Edit `web/src/app.css` or the literal classes in `web/src/` while the app runs. CSS updates preserve the counter value. `@tailwindcss/vite` produces ordinary CSS; `@silkui/vite` compiles it into `dist/app.sheet`, which the release pipeline embeds before the first frame. Release stylesheet adoption needs no stylesheet text compiler or raw CSS source.
