@@ -1,0 +1,9 @@
+[package]
+name = "ui-react-tailwind"
+description = "Tailwind CSS variant: A Silk UI app written in React, with Vite: silk task dev, silk task build"
+version = "0.1.0"
+silk-version = "0.1.0-dev.74+205aea3f5b2e"
+
+# The app is JavaScript, in web/. Silk only builds the tasks, which build and run the app.
+[profiles.tasks.dependencies]
+silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "00d443ceb78564a2ea6ec2c75eb6f7c954b1c629", path = "modules/silkui", package = "silkui" }

@@ -1,0 +1,80 @@
+//! A counter written in Loom and styled by styles/app.css. silkui generates the window around it.
+import loom.lib { Document, Node, NoCommand, NoOutput, Program, Update }
+import silk.mem.allocator { Allocator, OutOfMemoryError }
+
+/// Everything the program remembers.
+pub struct Model {
+  pub count: i64,
+  pub dark: bool,
+}
+
+/// Everything that can happen.
+pub union Message {
+  ClickedIncrement,
+  ClickedDecrement,
+  ClickedReset,
+  ClickedTheme,
+}
+
+type Next = Update<Model, NoCommand, NoOutput>
+
+impl Program<Message, NoCommand> for Model {
+  /// The model the program starts with.
+  effect fn init() -> Next
+    ! OutOfMemoryError
+    ? &mut Allocator {
+    return Next.of(Model { count: 0, dark: false })
+  }
+
+  /// The model after a message. Nothing else changes the model.
+  effect fn update(mut model: Model, message: Message) -> Next
+    ! OutOfMemoryError
+    ? &mut Allocator {
+    match move message {
+      Message.ClickedIncrement => {
+        model.count = model.count + 1
+      }
+      Message.ClickedDecrement => {
+        model.count = model.count - 1
+      }
+      Message.ClickedReset => {
+        model.count = 0
+      }
+      Message.ClickedTheme => {
+        model.dark = !model.dark
+      }
+    }
+    return Next.of(move model)
+  }
+
+  /// What the screen shows for a model. The classes are the ones styles/app.css defines.
+  fn view(model: &Model, h: &Document<Message>) -> Node {
+    return h.box(
+      // The theme is one class on the page: the sheet's variables do the rest.
+      &[h.class(if model.dark { "page dark" } else { "page" })],
+      &[
+        h.box(
+          &[h.class("card")],
+          &[
+            h.box(&[h.class("title")], &[h.text("Counter")]),
+            h.box(&[h.testId("count"), h.class("count")], &[h.number(model.count)]),
+            h.box(
+              &[h.class("actions")],
+              &[
+                button(h, "button", "-", Message.ClickedDecrement),
+                button(h, "button primary", "+", Message.ClickedIncrement),
+                button(h, "button", "Reset", Message.ClickedReset),
+              ],
+            ),
+            button(h, "button", if model.dark { "Light theme" } else { "Dark theme" }, Message.ClickedTheme),
+          ],
+        ),
+      ],
+    )
+  }
+}
+
+/// A button is a function: it takes its classes, what to show and the message a click sends.
+fn button(h: &Document<Message>, classes: string, label: string, message: Message) -> Node {
+  return h.button(&[h.onClick(move message), h.class(classes)], &[h.text(label)])
+}

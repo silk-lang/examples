@@ -1,0 +1,20 @@
+[package]
+name = "ui-loom-tailwind"
+description = "Tailwind CSS variant: A Silk UI app written in Loom, Silk's own UI framework: silk task dev, silk task build"
+version = "0.1.0"
+silk-version = "0.1.0-dev.74+205aea3f5b2e"
+kind = "library"
+main = "app.silk"
+exports = ["app"]
+
+# The app is the app module: silkui generates the host that opens it, taking Loom's hosts
+# from this same loom dependency, so the app and the host share one Loom.
+[dependencies]
+loom = { git = "https://github.com/silk-lang/loom.git", rev = "56a0ccc28666dd653a23b0972af8b80098abda1f", path = "modules/loom", package = "loom" }
+
+[profiles.tasks]
+main = "tasks.silk"
+
+[profiles.tasks.dependencies]
+silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "00d443ceb78564a2ea6ec2c75eb6f7c954b1c629", path = "modules/silkui", package = "silkui" }
+tailwind = { git = "https://github.com/silk-lang/silkui.git", rev = "00d443ceb78564a2ea6ec2c75eb6f7c954b1c629", path = "modules/tailwind", package = "ui-tailwind" }
