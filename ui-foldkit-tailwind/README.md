@@ -3,7 +3,7 @@
 A Silk UI counter in Foldkit, styled with Tailwind CSS 4. It runs in a desktop window.
 
 ```sh
-silk task dev
+silk run          # or silk task dev
 silk task build
 ```
 

@@ -28,15 +28,27 @@ silk init my-app -t hello   # same as -t silk-lang/examples/hello
 ## Silk UI templates
 
 Each `ui-*` template is a hello-world that runs with `silk task dev` right after `silk init`.
-`src/tasks.silk` defines the app (what it is written in, where it runs) and the `dev` and
+In the JavaScript templates `silk run` does the same: their `silk/main.silk` starts
+`silk task dev`. Loom templates are libraries that the generated host opens, so they have only
+`silk task dev`. Every command runs from the project root, which holds both sides:
+
+```
+silk.toml          source = "silk" points Silk at silk/
+silk/tasks.silk    the app definition and the dev and build tasks
+silk/main.silk     what `silk run` runs, for the JavaScript templates
+silk/app.silk      the app, for Loom
+js/                the app, for React, Foldkit and plain TypeScript
+package.json       npm packages, for the JavaScript templates
+vite.config.js     Vite with @silkui/vite
+```
+
+`silk/tasks.silk` defines the app (what it is written in, where it runs) and the `dev` and
 `build` tasks, all through one dependency, [silkui](https://github.com/silk-lang/silkui/tree/main/modules/silkui).
-The JavaScript templates keep the app in a Vite project in `web/`; the Loom one keeps it in
-`src/app.silk`.
 
 The JavaScript templates install `@silkui/core`, `@silkui/react`, `@silkui/foldkit` and
-`@silkui/vite` from npm. To try unreleased changes, point `web/package.json` at a silkui
+`@silkui/vite` from npm. To try unreleased changes, point `package.json` at a silkui
 checkout (`"@silkui/core": "file:<silkui>/modules/js/packages/core"` and so on, with
-`install-links=true` in `web/.npmrc`).
+`install-links=true` in `.npmrc`).
 
 `silkui` is pinned to a silkui revision, and the Loom templates' `loom` to a silk-lang/loom one. The
 generated hosts take their packages from those same dependencies, so bump each to a revision
