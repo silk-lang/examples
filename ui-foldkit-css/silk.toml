@@ -3,14 +3,14 @@ main = "tasks.silk"
 name = "ui-foldkit-css"
 description = "A Silk UI app styled with a plain CSS stylesheet, written in Foldkit, with Vite: silk task dev, silk task build"
 version = "0.1.0"
-silk-version = "0.1.0-pipeline.1"
+silk-version = "0.1.0-dev.85+45b9e51824ca"
 
 # The app is JavaScript, in web/. Silk only builds the tasks, which build and run the app.
 [dependencies]
-silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "6113c08008912306099e926dff31b42079d572e0", path = "modules/silkui", package = "silkui" }
-silkui_window = { git = "https://github.com/silk-lang/silkui.git", rev = "6113c08008912306099e926dff31b42079d572e0", path = "modules/silkui/window", package = "silkui-window" }
-silkui_window_node = { git = "https://github.com/silk-lang/silkui.git", rev = "6113c08008912306099e926dff31b42079d572e0", path = "modules/silkui/window/node", package = "silkui-window-node" }
-ui_tree = { git = "https://github.com/silk-lang/silkui.git", rev = "6113c08008912306099e926dff31b42079d572e0", path = "modules/tree", package = "ui-tree" }
-ui_inspect_server = { git = "https://github.com/silk-lang/silkui.git", rev = "6113c08008912306099e926dff31b42079d572e0", path = "modules/inspect/server", package = "ui-inspect-server" }
-silkjs = { git = "https://github.com/silk-lang/lib-silkjs.git", rev = "c62fd540237ecc7c67b240078a55ef182995e983", path = "modules/engine", package = "silkjs-engine" }
-node_runtime = { git = "https://github.com/silk-lang/lib-silkjs.git", rev = "c62fd540237ecc7c67b240078a55ef182995e983", path = "modules/runtime", package = "silkjs-runtime" }
+silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "74fcf1e20bfc6c6b22831d350a68788ee668e9ad", path = "modules/silkui", package = "silkui" }
+silkui_window = { git = "https://github.com/silk-lang/silkui.git", rev = "74fcf1e20bfc6c6b22831d350a68788ee668e9ad", path = "modules/silkui/window", package = "silkui-window" }
+silkui_window_node = { git = "https://github.com/silk-lang/silkui.git", rev = "74fcf1e20bfc6c6b22831d350a68788ee668e9ad", path = "modules/silkui/window/node", package = "silkui-window-node" }
+ui_tree = { git = "https://github.com/silk-lang/silkui.git", rev = "74fcf1e20bfc6c6b22831d350a68788ee668e9ad", path = "modules/tree", package = "ui-tree" }
+ui_inspect_server = { git = "https://github.com/silk-lang/silkui.git", rev = "74fcf1e20bfc6c6b22831d350a68788ee668e9ad", path = "modules/inspect/server", package = "ui-inspect-server" }
+silkjs = { git = "https://github.com/silk-lang/lib-silkjs.git", rev = "e9777858ccfaa7923f9f4108db0f13a2f1f41a54", path = "modules/engine", package = "silkjs-engine" }
+node_runtime = { git = "https://github.com/silk-lang/lib-silkjs.git", rev = "e9777858ccfaa7923f9f4108db0f13a2f1f41a54", path = "modules/runtime", package = "silkjs-runtime" }
