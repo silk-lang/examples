@@ -6,10 +6,10 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@silkui/core": "^0.1.3"
+    "@silkui/core": "^0.1.4"
   },
   "devDependencies": {
-    "@silkui/vite": "^0.1.3",
+    "@silkui/vite": "^0.1.4",
     "typescript": "^5.9.3",
     "vite": "^8.3.0",
     "tailwindcss": "4.3.5",
