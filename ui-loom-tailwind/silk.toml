@@ -10,16 +10,16 @@ exports = ["app"]
 # The app is the app module: silkui generates the host that opens it, taking Loom's hosts
 # from this same loom dependency, so the app and the host share one Loom.
 [dependencies]
-loom = { git = "https://github.com/silk-lang/loom.git", rev = "0b7ccedf2923f62647b6551f8397913a909ac8c6", path = "modules/loom", package = "loom" }
+loom = { git = "https://github.com/silk-lang/loom.git", rev = "07d85a80588b042f2adc630a27779255ae663575", path = "modules/loom", package = "loom" }
 
-silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "74fcf1e20bfc6c6b22831d350a68788ee668e9ad", path = "modules/silkui", package = "silkui" }
-silkui_window_loom = { git = "https://github.com/silk-lang/loom.git", rev = "0b7ccedf2923f62647b6551f8397913a909ac8c6", path = "modules/silkui/window", package = "silkui-window-loom" }
-silkui_web_canvas = { git = "https://github.com/silk-lang/loom.git", rev = "0b7ccedf2923f62647b6551f8397913a909ac8c6", path = "modules/silkui/web/canvas", package = "silkui-web-canvas" }
-silkui_web_dom = { git = "https://github.com/silk-lang/loom.git", rev = "0b7ccedf2923f62647b6551f8397913a909ac8c6", path = "modules/silkui/web/dom", package = "silkui-web-dom" }
-loom_dom = { git = "https://github.com/silk-lang/loom.git", rev = "0b7ccedf2923f62647b6551f8397913a909ac8c6", path = "modules/loom/dom", package = "loom-dom" }
-ui_tree_window = { git = "https://github.com/silk-lang/silkui.git", rev = "74fcf1e20bfc6c6b22831d350a68788ee668e9ad", path = "modules/tree/window", package = "ui-tree-window" }
+silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "f0b39f3385ccabd7a514b478fcf147295a24dddf", path = "modules/silkui", package = "silkui" }
+silkui_window_loom = { git = "https://github.com/silk-lang/loom.git", rev = "07d85a80588b042f2adc630a27779255ae663575", path = "modules/silkui/window", package = "silkui-window-loom" }
+silkui_web_canvas = { git = "https://github.com/silk-lang/loom.git", rev = "07d85a80588b042f2adc630a27779255ae663575", path = "modules/silkui/web/canvas", package = "silkui-web-canvas" }
+silkui_web_dom = { git = "https://github.com/silk-lang/loom.git", rev = "07d85a80588b042f2adc630a27779255ae663575", path = "modules/silkui/web/dom", package = "silkui-web-dom" }
+loom_dom = { git = "https://github.com/silk-lang/loom.git", rev = "07d85a80588b042f2adc630a27779255ae663575", path = "modules/loom/dom", package = "loom-dom" }
+ui_tree_window = { git = "https://github.com/silk-lang/silkui.git", rev = "f0b39f3385ccabd7a514b478fcf147295a24dddf", path = "modules/tree/window", package = "ui-tree-window" }
 platform_window = { git = "https://github.com/silk-lang/lib-native.git", rev = "3e639da37424654c1df9938e83f8c079ccb45052", path = "modules/platform/window", package = "platform-window" }
 webgpu = { git = "https://github.com/silk-lang/lib-native.git", rev = "3e639da37424654c1df9938e83f8c079ccb45052", path = "modules/gpu/webgpu", package = "gpu-webgpu" }
-ui_tree = { git = "https://github.com/silk-lang/silkui.git", rev = "74fcf1e20bfc6c6b22831d350a68788ee668e9ad", path = "modules/tree", package = "ui-tree" }
-ui_inspect_server = { git = "https://github.com/silk-lang/silkui.git", rev = "74fcf1e20bfc6c6b22831d350a68788ee668e9ad", path = "modules/inspect/server", package = "ui-inspect-server" }
-tailwind = { git = "https://github.com/silk-lang/silkui.git", rev = "74fcf1e20bfc6c6b22831d350a68788ee668e9ad", path = "modules/tailwind", package = "ui-tailwind" }
+ui_tree = { git = "https://github.com/silk-lang/silkui.git", rev = "f0b39f3385ccabd7a514b478fcf147295a24dddf", path = "modules/tree", package = "ui-tree" }
+ui_inspect_server = { git = "https://github.com/silk-lang/silkui.git", rev = "f0b39f3385ccabd7a514b478fcf147295a24dddf", path = "modules/inspect/server", package = "ui-inspect-server" }
+tailwind = { git = "https://github.com/silk-lang/silkui.git", rev = "f0b39f3385ccabd7a514b478fcf147295a24dddf", path = "modules/tailwind", package = "ui-tailwind" }
