@@ -20,6 +20,10 @@ silk init my-app -t hello   # same as -t silk-lang/examples/hello
 | `ui-foldkit-tailwind` | Foldkit counter with Tailwind CSS |
 | `ui-js-tailwind` | TypeScript counter with Tailwind CSS |
 | `ui-loom-tailwind` | Loom counter with Tailwind CSS on window, canvas and DOM |
+| `ui-react-css` | React counter styled by a plain CSS file, with a theme switch |
+| `ui-foldkit-css` | Foldkit counter styled by a plain CSS file, with a theme switch |
+| `ui-js-css` | TypeScript counter styled by a plain CSS file, with a theme switch |
+| `ui-loom-css` | Loom counter styled by a plain CSS file, on window, canvas and DOM |
 
 ## Silk UI templates
 
@@ -34,13 +38,16 @@ The JavaScript templates install `@silkui/core`, `@silkui/react`, `@silkui/foldk
 checkout (`"@silkui/core": "file:<silkui>/modules/js/packages/core"` and so on, with
 `install-links=true` in `web/.npmrc`).
 
-`silkui` is pinned to a silkui revision, and `ui-loom`'s `loom` to a silk-lang/loom one. The
+`silkui` is pinned to a silkui revision, and the Loom templates' `loom` to a silk-lang/loom one. The
 generated hosts take their packages from those same dependencies, so bump each to a revision
 that works with the other.
 
-The `*-tailwind` variants use literal classes and a stylesheet. JavaScript variants run
-`@tailwindcss/vite` before `@silkui/vite`; Loom uses the separate `ui-tailwind` build/watch
-helper, which can run without Node. The original templates keep their style-object defaults.
+There are three ways to style, and a template for each. The original templates use style
+objects. The `*-css` variants use class names and one plain CSS file: custom properties for a
+light and a dark theme, state selectors, a transition. The `*-tailwind` variants use Tailwind
+classes: JavaScript ones run `@tailwindcss/vite` before `@silkui/vite`; Loom uses the separate
+`ui-tailwind` build/watch helper, which can run without Node. Any other tool that produces
+ordinary CSS works the same way as the plain file.
 
 ## Adding a template
 

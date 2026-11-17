@@ -12,5 +12,3 @@ Edit `web/src/app.css` or the literal classes in `web/src/` while the app runs. 
 The CSS also contains a hand-written `.counter-button` rule. You can use plain CSS without Tailwind by removing its import and Vite plugin. Style objects still work as inline declarations alongside classes.
 
 `src/tasks.silk` defines the window and build tasks. The first development build installs the Vite dependencies and builds the native host. JavaScript templates currently support the window target.
-
-This feature branch needs the matching stylesheet-capable `@silkui/*` packages. Until those packages are published, use the checkout instructions in the [repository README](https://github.com/silk-lang/examples#silk-ui-templates).

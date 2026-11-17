@@ -1,0 +1,86 @@
+/* The theme. Every rule below reads these values, so `.dark` only has to change them. */
+.page {
+  --surface: #f8fafc;
+  --card: #ffffff;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: #cbd5e1;
+  --accent: #2563eb;
+  --accent-ink: #ffffff;
+
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--surface);
+  color: var(--ink);
+  font-family: system-ui, sans-serif;
+}
+
+.page.dark {
+  --surface: #0f172a;
+  --card: #1e293b;
+  --ink: #f1f5f9;
+  --muted: #94a3b8;
+  --line: #334155;
+  --accent: #60a5fa;
+  --accent-ink: #0f172a;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 16px;
+  padding: 24px 32px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background-color: var(--card);
+}
+
+.title {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.count {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  column-gap: 8px;
+}
+
+.button {
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+/* States are selectors: the app never hears about the pointer. */
+.button:hover {
+  background-color: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.button:active {
+  translate: 0 1px;
+}
+
+.button:focus-visible {
+  border-color: var(--accent);
+}
+
+.button.primary {
+  border-color: var(--accent);
+  background-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.button.primary:hover {
+  background-color: color-mix(in srgb, var(--accent) 85%, var(--ink));
+}
