@@ -86,7 +86,7 @@ function TitleBar({ theme }: { theme: Theme }) {
       </box>
       <box style={{ ...row, gap: 8, position: "absolute", right: 28, top: 0, bottom: 0, fontFamily: mono, fontSize: 12, color: theme.faint }}>
         edit
-        <box style={{ color: rgb(theme.ink) }}>web/src/App.tsx</box>
+        <box style={{ color: rgb(theme.ink) }}>js/App.tsx</box>
         to make it yours
       </box>
     </box>
