@@ -28,6 +28,12 @@ silk init my-app -t hello   # same as -t silk-lang/examples/hello
 ## Silk UI templates
 
 Each `ui-*` template is a hello-world that runs with `silk task dev` right after `silk init`.
+
+On Linux the window host builds against the X11, xkbcommon and Wayland headers:
+
+```sh
+sudo apt-get install -y libx11-dev libxkbcommon-dev libwayland-dev wayland-protocols
+```
 `src/tasks.silk` defines the app (what it is written in, where it runs) and the `dev` and
 `build` tasks, all through one dependency, [silkui](https://github.com/silk-lang/silkui/tree/main/modules/silkui).
 The JavaScript templates keep the app in a Vite project in `web/`; the Loom one keeps it in
