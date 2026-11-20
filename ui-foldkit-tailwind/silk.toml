@@ -17,4 +17,7 @@ node_runtime = { git = "https://github.com/silk-lang/lib-silkjs.git", rev = "336
 
 [template]
 # What `silk init` suggests running in the new project, after `cd` into it.
-next-steps = ["silk task dev"]
+next-steps = [
+  { run = "silk task dev", description = "open the app, rebuilding on change" },
+  { run = "silk task build --release", description = "write the release program to dist/" },
+]

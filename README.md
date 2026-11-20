@@ -79,7 +79,11 @@ table, as the `ui-*` templates do:
 
 ```toml
 [template]
-next-steps = ["silk task dev"]
+next-steps = [
+  { run = "silk task dev", description = "open the app, rebuilding on change" },
+]
 ```
+
+Each step is a command and an optional one-line description that `silk init` prints beside it.
 
 `next-steps = []` prints no next steps. The table is removed from the new project's `silk.toml`.
