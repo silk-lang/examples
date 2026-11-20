@@ -1,10 +1,14 @@
 import silk.core.effect { Effect }
-import silk.io.logger { LogError }
+import silk.concurrency.sync { Arc }
+import silk.io.logger { Logger }
 import silk.io.logger_native { StdoutLogger }
+import silk.mem.allocator { Allocator, OutOfMemoryError }
 
 pub effect fn main() -> ()
-  ! LogError {
-  let mut logger = StdoutLogger.make()
+  ! OutOfMemoryError {
+  let mut allocator = Allocator.systemAllocatorProvider()
+  let logger = run Arc<StdoutLogger>.make(StdoutLogger.make())
+    |> Effect.provideMut<Allocator>(&mut allocator)
 
-  run Effect.log("Hello, world!\n", &()) |> Effect.provideMut(&mut logger)
+  run Effect.log("Hello, world!\n", &()) |> Effect.provideAmbient<Logger>(&logger)
 }

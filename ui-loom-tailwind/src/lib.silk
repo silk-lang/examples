@@ -1,0 +1,3 @@
+//! The package root. The app is the `app` module, which silkui opens in each target.
+//! A library without lib.silk is rooted at its first export, which the generated hosts import.
+pub import app
