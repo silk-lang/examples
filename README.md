@@ -72,3 +72,14 @@ run = ["scripts/post-init.sh"]
 ```
 
 Each entry runs once in the new project's directory and is removed from its `silk.toml`.
+
+After creating the project, `silk init` prints the next steps: `cd` into it, then `silk run`
+(`silk test` for a library). A template that is run some other way says so in its `[template]`
+table, as the `ui-*` templates do:
+
+```toml
+[template]
+next-steps = ["silk task dev"]
+```
+
+`next-steps = []` prints no next steps. The table is removed from the new project's `silk.toml`.

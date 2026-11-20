@@ -3,14 +3,18 @@ main = "tasks.silk"
 name = "ui-js-app"
 description = "A Silk UI app written in plain JavaScript or TypeScript, with Vite: silk task dev, silk task build"
 version = "0.1.0"
-silk-version = "0.1.0-dev.87+37fa5f8857de"
+silk-version = "0.1.0-dev.90+43166993a300"
 
 # The app is JavaScript, in web/. Silk only builds the tasks, which build and run the app.
 [dependencies]
-silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "2c0bf3d7bf0c9eb0e0a1a4cccbb977b558ad5d38", path = "modules/silkui", package = "silkui" }
-silkui_window = { git = "https://github.com/silk-lang/silkui.git", rev = "2c0bf3d7bf0c9eb0e0a1a4cccbb977b558ad5d38", path = "modules/silkui/window", package = "silkui-window" }
-silkui_window_node = { git = "https://github.com/silk-lang/silkui.git", rev = "2c0bf3d7bf0c9eb0e0a1a4cccbb977b558ad5d38", path = "modules/silkui/window/node", package = "silkui-window-node" }
-ui_tree = { git = "https://github.com/silk-lang/silkui.git", rev = "2c0bf3d7bf0c9eb0e0a1a4cccbb977b558ad5d38", path = "modules/tree", package = "ui-tree" }
-ui_inspect_server = { git = "https://github.com/silk-lang/silkui.git", rev = "2c0bf3d7bf0c9eb0e0a1a4cccbb977b558ad5d38", path = "modules/inspect/server", package = "ui-inspect-server" }
-silkjs = { git = "https://github.com/silk-lang/lib-silkjs.git", rev = "f33f8793086ad93a80154de1c58b7903140e4928", path = "modules/engine", package = "silkjs-engine" }
-node_runtime = { git = "https://github.com/silk-lang/lib-silkjs.git", rev = "f33f8793086ad93a80154de1c58b7903140e4928", path = "modules/runtime", package = "silkjs-runtime" }
+silkui = { git = "https://github.com/silk-lang/silkui.git", rev = "cfa9be26aba6007695ad750cb72206a01308b729", path = "modules/silkui", package = "silkui" }
+silkui_window = { git = "https://github.com/silk-lang/silkui.git", rev = "cfa9be26aba6007695ad750cb72206a01308b729", path = "modules/silkui/window", package = "silkui-window" }
+silkui_window_node = { git = "https://github.com/silk-lang/silkui.git", rev = "cfa9be26aba6007695ad750cb72206a01308b729", path = "modules/silkui/window/node", package = "silkui-window-node" }
+ui_tree = { git = "https://github.com/silk-lang/silkui.git", rev = "cfa9be26aba6007695ad750cb72206a01308b729", path = "modules/tree", package = "ui-tree" }
+ui_inspect_server = { git = "https://github.com/silk-lang/silkui.git", rev = "cfa9be26aba6007695ad750cb72206a01308b729", path = "modules/inspect/server", package = "ui-inspect-server" }
+silkjs = { git = "https://github.com/silk-lang/lib-silkjs.git", rev = "33608cc5dc56658347e56f855cb110726363a0cd", path = "modules/engine", package = "silkjs-engine" }
+node_runtime = { git = "https://github.com/silk-lang/lib-silkjs.git", rev = "33608cc5dc56658347e56f855cb110726363a0cd", path = "modules/runtime", package = "silkjs-runtime" }
+
+[template]
+# What `silk init` suggests running in the new project, after `cd` into it.
+next-steps = ["silk task dev"]
