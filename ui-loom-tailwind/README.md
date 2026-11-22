@@ -3,10 +3,10 @@
 A counter written in Silk and styled with Tailwind CSS 4. It runs in a native window, on a WebGPU canvas, or as browser DOM elements.
 
 ```sh
-silk task dev                        # native window
-silk task dev --platform web-dom     # browser DOM
-silk task dev --platform web-canvas  # WebGPU canvas
-silk task build --release            # release builds for all three targets
+silk dev                        # native window
+silk dev --target web-dom     # browser DOM
+silk dev --target web-canvas  # WebGPU canvas
+silk build --release --out dist            # release builds for all three targets
 ```
 
 `src/app.silk` uses literal `h.class("...")` strings. `styles/input.css` imports Tailwind and scans those Silk files with `@source`. The optional `ui-tailwind` helper produces `styles/app.css` before the UI build, and watches source and CSS edits during development. `App.stylesheet("styles/app.css")` then compiles the CSS for window and canvas or links it as a real stylesheet for DOM. CSS edits preserve the counter state.

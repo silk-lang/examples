@@ -1,17 +1,18 @@
-//! The app and its tasks: `silk task dev` opens it in a window, and Vite replaces the modules
-//! an edit touches; `silk task build --release` writes the release program, bundle inside, to dist/window/.
+//! The app and its tasks: `silk dev` opens it in a window, and Vite replaces the modules an
+//! edit touches; `silk build --release` builds the release program, bundle inside, and
+//! `--out <dir>` also copies it to `<dir>/window/`.
 import silkui.app { App, Framework, Target, Window, Built, Running }
-import silk.build.graph { Options, BuildError }
+import silk.build.graph { Options }
+import silk.build.tasks { StandardError }
 import silk.cli.command { Command, CommandLine, Opt }
-import silk.cli.task { Task, TaskError, TaskSet }
-import silk.io.writer { WriterError }
+import silk.cli.task { Task, TaskSet }
 import silk.mem.allocator { Allocator, OutOfMemoryError }
-import silk.system.child_process { ChildProcess, ProcessError }
-import silk.system.filesystem { FileError, FileSystem }
-import silk.system.host_input { HostInput, HostInputError }
+import silk.system.child_process { ChildProcess }
+import silk.system.filesystem { FileSystem }
+import silk.system.host_input { HostInput }
 import silk.text.string { String }
 
-/// The app: what it is written in and where it runs. The program in dist/ takes the project's name.
+/// The app: what it is written in and where it runs. Its program takes the project's name.
 effect fn app() -> App
   ! OutOfMemoryError
   ? &mut Allocator {
@@ -22,45 +23,34 @@ effect fn app() -> App
 }
 
 union Tasks {
-  Dev { pub platform: String, pub options: Options },
-  Build { pub platform: String, pub options: Options },
-  Plan { pub platform: String, pub options: Options },
+  Build { pub options: Options, pub out: String },
+  Run { pub options: Options },
+  Dev { pub options: Options },
+  Plan { pub options: Options },
 }
 
 impl CommandLine for Tasks {
   static fn command() -> Command<Tasks> {
     return Command<Tasks>.make("tasks", "Build and run the app")
-      |> Command.variant("Dev", "Open the app with the development tools, rebuilding on change")
-      |> Command.variant("Build", "Write the programs to dist/<target>/ (use --release to optimize)")
+      |> Command.variant("Build", "Build the app into build/ (--release optimizes)")
+      |> Command.variant("Run", "Build the app and run it")
+      |> Command.variant("Dev", "Run the app with the development tools, and update it on change")
+      |> Command.variant("Plan", "Write the editor's compilation requests")
       |> Command.flatten("options")
-      |> Command.variant("Plan", "Write the editor compilation requests")
-      |> Command.option("platform", Opt.about("Only this target (window)"))
+      |> Command.option("out", Opt.about("Also copy the app to this directory"))
   }
 }
 
 impl TaskSet for Tasks {
   effect fn perform(self: Tasks) -> ()
-    ! BuildError
-      | TaskError
-      | ProcessError
-      | FileError
-      | HostInputError
-      | OutOfMemoryError
-      | WriterError
+    ! StandardError
     ? &mut HostInput | &mut Allocator | &mut ChildProcess | &mut FileSystem {
     match move self {
-      Tasks.Dev { platform, options } => run app()
-        |> App.only(String.view(&platform))
-        |> App.dev(&options)
-        |> Built.launch()
-        |> Running.watch()
-      Tasks.Build { platform, options } => run app()
-        |> App.only(String.view(&platform))
-        |> App.build(&options)
-        |> Built.write("dist")
-      Tasks.Plan { platform, options } => {
-        let configured = run app() |> App.only(platform.view())
-        let graph = run configured.compilations(&options)
+      Tasks.Build { options, out } => run app() |> App.build(&options) |> Built.write(out.view())
+      Tasks.Run { options } => run app() |> App.build(&options) |> Built.launch() |> Running.watch()
+      Tasks.Dev { options } => run app() |> App.dev(&options) |> Built.launch() |> Running.watch()
+      Tasks.Plan { options } => {
+        let graph = run (run app()).compilations(&options)
         drop run graph.write()
       }
     }

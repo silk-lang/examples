@@ -5,9 +5,9 @@ UI framework: a model, messages, `update` and `view`, all in Silk. It runs in a 
 and in a browser page.
 
 ```sh
-silk task dev                     # open the window; it restarts when src/ changes
-silk task dev --platform web-dom  # serve it as a page on http://127.0.0.1:8090/ instead
-silk task build --release         # write dist/window/ (a program) and dist/web-dom/ (a site)
+silk dev                     # open the window; it restarts when src/ changes
+silk dev --target web-dom  # serve it as a page on http://127.0.0.1:8090/ instead
+silk build --release --out dist         # write dist/window/ (a program) and dist/web-dom/ (a site)
 ```
 
 The first `dev` builds the window, which takes a few minutes; after that a change relinks in

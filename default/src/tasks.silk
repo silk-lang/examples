@@ -1,0 +1,65 @@
+//! This package's tasks. `silk build`, `silk run`, `silk dev` and `silk plan` run the variants
+//! below, and `silk task <name>` runs any other. Each standard task takes --release,
+//! --optimization none|speed|size, --target <triple> and --debug true|false.
+//!
+//! Change `compilation` to change what every task builds, and the editor sees. Add a variant,
+//! with fields for its own flags, for a task of your own.
+import silk.build.graph { Compilation, Options, BuildError }
+import silk.build.tasks { Standard, StandardError }
+import silk.cli.command { Command, CommandLine, Opt }
+import silk.cli.task { Task, TaskSet }
+import silk.collections.list { List }
+import silk.mem.allocator { Allocator }
+import silk.system.child_process { ChildProcess }
+import silk.system.filesystem { FileSystem }
+import silk.system.host_input { HostInput }
+import silk.text.string { String }
+
+union Tasks {
+  Build { pub options: Options, pub out: String },
+  Run { pub options: Options, pub arguments: List<String> },
+  Dev { pub options: Options, pub arguments: List<String> },
+  Plan { pub options: Options },
+}
+
+impl CommandLine for Tasks {
+  static fn command() -> Command<Tasks> {
+    return Command<Tasks>.make("tasks", "Build and run the program")
+      |> Command.variant("Build", "Build the program into build/ (--release optimizes)")
+      |> Command.variant("Run", "Build the program and run it")
+      |> Command.variant("Dev", "Run the program, and run it again when a source changes")
+      |> Command.variant("Plan", "Write the editor's compilation requests")
+      |> Command.flatten("options")
+      |> Command.option("out", Opt.about("Also copy the program to this directory"))
+      |> Command.arg("arguments", Opt.about("The program's arguments, after --"))
+  }
+}
+
+/// What every task builds: the package's program with the command's options. A setting made here,
+/// such as `run base.package("dependency", Package.make() |> Package.optimize(...))`, reaches
+/// build, run, dev and the editor alike.
+effect fn compilation(options: &Options) -> Compilation
+  ! BuildError
+  ? &mut Allocator | &mut FileSystem | &mut HostInput {
+  return run Compilation.fromPackage(options)
+}
+
+impl TaskSet for Tasks {
+  effect fn perform(self: Tasks) -> ()
+    ! StandardError
+    ? &mut HostInput | &mut Allocator | &mut ChildProcess | &mut FileSystem {
+    match move self {
+      Tasks.Build { options, out } => run Standard.build(run compilation(&options), out.view())
+      Tasks.Run { options, arguments } => {
+        run Standard.start(run compilation(&options), &options, &arguments)
+      }
+      Tasks.Dev { options, arguments } => run Standard.dev(&options, &arguments)
+      Tasks.Plan { options } => run Standard.plan(run compilation(&options))
+    }
+  }
+}
+
+pub effect fn main() -> i32
+  ? &mut HostInput {
+  return run Task.main<Tasks>()
+}

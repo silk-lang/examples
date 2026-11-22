@@ -25,9 +25,19 @@ silk init my-app -t hello   # same as -t silk-lang/examples/hello
 | `ui-js-css` | TypeScript counter styled by a plain CSS file, with a theme switch |
 | `ui-loom-css` | Loom counter styled by a plain CSS file, on window, canvas and DOM |
 
+## Tasks
+
+Every program template ships a `src/tasks.silk` with the same four tasks, so every project
+answers the same commands with the same flags: `silk build` (`--release`, `--optimization`,
+`--target`, `--debug`, and `--out <dir>` to copy what ships), `silk run`, `silk dev` (run it
+again, or update it, on each change) and `silk plan` (for the editor). Builds stay in
+`build/<target>/<mode>/`. A project changes how it compiles in one place, its `compilation`
+(or `app`) function, and adds its own tasks as more variants. `silk test` stays the
+toolchain's own command.
+
 ## Silk UI templates
 
-Each `ui-*` template is a hello-world that runs with `silk task dev` right after `silk init`.
+Each `ui-*` template is a hello-world that runs with `silk dev` right after `silk init`.
 
 On Linux the window host builds against the X11, xkbcommon and Wayland headers:
 
@@ -73,14 +83,14 @@ run = ["scripts/post-init.sh"]
 
 Each entry runs once in the new project's directory and is removed from its `silk.toml`.
 
-After creating the project, `silk init` prints the next steps: `cd` into it, then `silk run`
+After creating the project, `silk init` prints the next steps: `cd` into it, then `silk dev`
 (`silk test` for a library). A template that is run some other way says so in its `[template]`
 table, as the `ui-*` templates do:
 
 ```toml
 [template]
 next-steps = [
-  { run = "silk task dev", description = "open the app, rebuilding on change" },
+  { run = "silk dev", description = "open the app, and update it as you edit" },
 ]
 ```
 
