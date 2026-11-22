@@ -4,8 +4,8 @@ A Silk UI app written in Foldkit. It runs in a desktop window on the SilkJS
 Engine, with no browser inside.
 
 ```sh
-silk task dev              # open the window; edits to web/src/ show up without a restart
-silk task build --release  # write the release program to dist/window/
+silk dev              # open the window; edits to web/src/ show up without a restart
+silk build --release --out dist  # build the release program, and copy it to dist/window/
 ```
 
 The first `dev` installs `web/`'s npm packages and builds the window, which takes a few

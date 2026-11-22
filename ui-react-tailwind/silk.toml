@@ -1,7 +1,7 @@
 [package]
 main = "tasks.silk"
 name = "ui-react-tailwind"
-description = "Tailwind CSS variant: A Silk UI app written in React, with Vite: silk task dev, silk task build"
+description = "Tailwind CSS variant: A Silk UI app written in React, with Vite: silk dev, silk build"
 version = "0.1.0"
 silk-version = "0.1.0-dev.90+43166993a300"
 
@@ -18,6 +18,6 @@ node_runtime = { git = "https://github.com/silk-lang/lib-silkjs.git", rev = "336
 [template]
 # What `silk init` suggests running in the new project, after `cd` into it.
 next-steps = [
-  { run = "silk task dev", description = "open the app, rebuilding on change" },
-  { run = "silk task build --release", description = "write the release program to dist/" },
+  { run = "silk dev", description = "open the app, and update it as you edit" },
+  { run = "silk build --release --out dist", description = "build the release program and copy it to dist/" },
 ]
