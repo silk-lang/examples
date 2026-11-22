@@ -50,7 +50,9 @@ impl TaskSet for Tasks {
     ? &mut HostInput | &mut Allocator | &mut ChildProcess | &mut FileSystem {
     match move self {
       Tasks.Build { options, out } => run Standard.build(run compilation(&options), out.view())
-      Tasks.Run { options, arguments } => run Standard.start(run compilation(&options), &arguments)
+      Tasks.Run { options, arguments } => {
+        run Standard.start(run compilation(&options), &options, &arguments)
+      }
       Tasks.Dev { options, arguments } => run Standard.dev(&options, &arguments)
       Tasks.Plan { options } => run Standard.plan(run compilation(&options))
     }
